@@ -53,11 +53,13 @@
                         <td>@e.Id</td>
                         @Html.HiddenFor(dep => e.Id)
                         <td>@Html.TextAreaFor(dep => e.Name, new { @class = "form-control" })</td>
-                        <input type="submit" value="Save" class="btn btn-success" /> |
-                        @Html.ActionLink("Cancel", "Index", new { id = "" }, new { @class = "btn btn-default" })
+                                                               
+                        <td>  <input type="submit" value="Save" class="btn btn-success" />  
+                       @Html.ActionLink("Cancel", "Index", new { id = "" }, new { @class = "btn btn-default" })   </td>
 
-
+                      
                     </tr>
+                   
 
                 }
 
