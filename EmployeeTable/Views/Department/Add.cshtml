@@ -1,0 +1,36 @@
+﻿@model EmployeeTable.Models.Entities.Department
+
+@{
+    ViewBag.Title = "Add a new Department";
+}
+
+<h2>title</h2>
+                                        
+
+<!-- i want to make a form-->   
+
+
+@using (Html.BeginForm("Add","Department",FormMethod.Post))
+{
+
+    <div>
+        @Html.LabelFor(e => e.Id)
+        @Html.TextBoxFor(e => e.Id, new {@class = "form-control"})
+        @Html.ValidationMessageFor(e => e.Id)
+    </div>
+
+    <div>
+        @Html.LabelFor(e => e.Name)
+        @Html.TextBoxFor(e => e.Name, new {@class = "form-control"})
+        @Html.ValidationMessageFor(e => e.Name)
+    </div>
+
+   
+
+
+    <br/>
+    <div> <input type="submit" class="btn btn-primary"/> </div>
+
+
+
+}

@@ -1,0 +1,62 @@
+﻿@using EmployeeTable.Models.Entities
+@model EmployeeTable.Models.Entities.Employee
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2> Edit Employee</h2>
+
+<br />
+
+
+@using (Html.BeginForm("Edit", "Employee", FormMethod.Post))
+{
+
+    <div>
+        @Html.LabelFor(e => e.Id)
+        @Html.TextBoxFor(e => e.Id, new {@class = "form-control", disabled = "disabled"})
+        @Html.ValidationMessageFor(e => e.Id)
+    </div>
+
+    <div>
+        @Html.LabelFor(e => e.Name)
+        @Html.TextBoxFor(e => e.Name, new {@class = "form-control"})
+        @Html.ValidationMessageFor(e => e.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(e => e.Age)
+        @Html.TextBoxFor(e => e.Age, new {@class = "form-control"})
+        @Html.ValidationMessageFor(e => e.Age)
+    </div>
+
+
+    <div>
+        @Html.LabelFor(e => e.Gender)
+        @Html.DropDownListFor(e => e.Gender, new List<SelectListItem>()
+        {
+            new SelectListItem()
+            {
+                Text = Gender.Male.ToString(),
+                Value = Gender.Male.ToString()
+            },
+
+            new SelectListItem()
+            {
+                Text = Gender.Female.ToString(),
+                Value = Gender.Female.ToString()
+            }
+        }, "Select Gender", new {@class = "form-control"})
+        @Html.ValidationMessageFor(e => e.Age)
+    </div> 
+
+    <div>
+        @Html.LabelFor(e => e.Fk_DepartmentId)
+        @Html.TextBoxFor(e => e.Fk_DepartmentId, new {@class = "form-control", disabled = "disabled"})
+        @Html.ValidationMessageFor(e => e.Fk_DepartmentId)
+    </div>
+
+    <br/>
+    <div> <input type="submit" class="btn btn-primary"/> </div>
+
+}

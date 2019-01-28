@@ -1,0 +1,59 @@
+﻿@model List<EmployeeTable.Models.Entities.Department>
+        
+@{
+    ViewBag.Title = "Departments List";
+}
+
+
+<h2>List of Departments</h2>
+                            
+
+@Html.ActionLink("+ Add a new Department", "Add")
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        
+
+    </tr>
+    </thead>
+
+
+    <tbody>
+    @foreach (var e in Model)
+    {
+        <tr>
+
+            <td>@e.Id</td>
+            <td>@e.Name</td>
+            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
+
+                <a class="btn-link" onclick="deptDelete(@e.Id)">Delete</a>
+            </td>
+
+
+
+        </tr>
+    }
+
+
+    </tbody>
+
+
+</table>
+              
+<script>
+    function deptDelete(id) {
+        var result = confirm("Confirm the Delete Process ?");
+
+        if (result) {
+            window.location.replace("/Department/Delete/"+id);
+        }
+    }
+
+
+</script>

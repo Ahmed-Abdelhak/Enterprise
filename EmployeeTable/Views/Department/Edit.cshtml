@@ -1,0 +1,25 @@
+﻿@model EmployeeTable.Models.Entities.Department
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>Edit Department</h2>
+
+@using (Html.BeginForm("Edit", "Department", FormMethod.Post))
+{
+
+    @Html.LabelFor(d => d.Id)
+    @Html.TextBoxFor(d=>d.Id, new { @class = "form-control", disabled = "disabled" })
+    @Html.ValidationMessageFor(d => d.Id)
+
+
+    @Html.LabelFor(d => d.Name)
+    @Html.TextBoxFor(d=>d.Name, new { @class = "form-control"})
+    @Html.ValidationMessageFor(d => d.Name)
+
+    <br/>
+    <div> <input type="submit" class="btn btn-primary"/> </div>
+
+}
+
