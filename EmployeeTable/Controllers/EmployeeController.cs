@@ -1,6 +1,7 @@
 ﻿using EmployeeTable.Models;
 using EmployeeTable.Models.Entities;
 using EmployeeTable.ViewModels;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -19,29 +20,40 @@ namespace EmployeeTable.Controllers
         public ActionResult Index()
         {
 
-            return View(_context.Employees.ToList());
+
+            return View(_context.Employees.Include(e=> e.Department).ToList());
         }
 
         [HttpGet]
         public ActionResult Add()
         {
+            var employeeVm = new EmployeeViewModel()
+            {
+              Departments = _context.Departments.ToList()
+            };
+
             
-            return View();
+            return View(employeeVm);
         }
 
         [HttpPost]
-        public ActionResult Add(Employee e)
+        public ActionResult Add(Employee Employee)
         {
+            var employeeVm = new EmployeeViewModel()
+            {
+                Departments = _context.Departments.ToList()
+            };
+
             if (ModelState.IsValid)
             {
-                _context.Employees.Add(e);
+                _context.Employees.Add(Employee);
                 _context.SaveChanges();
                 return RedirectToAction("Index");      // return the redirected view of the Index  (table after adding)
             }
 
 
 
-            return View();
+            return View(employeeVm);
         }
 
         public ActionResult InlineEdit(int id)
@@ -71,11 +83,16 @@ namespace EmployeeTable.Controllers
 
         public ActionResult Edit(int id)
         {
-            //var emp = context.Employees.Where(e => e.Name == "Osama").FirstOrDefault();   // this if you want to search by NAME
 
-            var e = _context.Employees.Find(id);
-            return View(e);       // i want to render an employee edit fields, so i need to send an employee to the VIEW !
-                                  // but which employee ? the one in the list whose ID matches the received id !
+
+            var employeeVm = new EmployeeViewModel()
+            {
+                Departments = _context.Departments.ToList(),
+                Employee = _context.Employees.Find(id)
+
+            };
+
+            return View(employeeVm);
         }
 
         [HttpPost]
@@ -87,11 +104,19 @@ namespace EmployeeTable.Controllers
                 emp.Name = e.Name;
                 emp.Age = e.Age;
                 emp.Gender = e.Gender;
+                emp.Department = e.Department;
+                emp.Fk_DepartmentId = e.Fk_DepartmentId;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View();
+            var employeeVm = new EmployeeViewModel()
+            {
+                Departments = _context.Departments.ToList(),
+
+            };
+
+            return View(employeeVm);
         }
 
         public ActionResult Delete(int id)

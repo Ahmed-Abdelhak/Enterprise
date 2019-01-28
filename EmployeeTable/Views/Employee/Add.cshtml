@@ -1,40 +1,44 @@
 ﻿@using EmployeeTable.Models.Entities
-@model EmployeeTable.Models.Entities.Employee
+@model EmployeeTable.ViewModels.EmployeeViewModel
 
 @{
     ViewBag.Title = "Add";
 }
 
-<h2>Add New Emp</h2>      
-       
+<h2>Add New Emp</h2>
 
-@using (Html.BeginForm())           
+
+@using (Html.BeginForm())
 {
     <div>
-        @Html.LabelFor(e => e.Id)
-        @Html.TextBoxFor(e=>e.Id,  new { @class = "form-control"})   <!-- i want to style my text box with a class of cs bootstrap-->
-        <!-- so, i use At because there's a reserved word called class in c#--> 
-        @Html.ValidationMessageFor(e=>e.Id) 
-   
-    </div>                                                     
-     
-    
+        @Html.LabelFor(e => e.Employee.Id)
+        @Html.TextBoxFor(e => e.Employee.Id, new { @class = "form-control" })   <!-- i want to style my text box with a class of cs bootstrap-->
+        <!-- so, i use At because there's a reserved word called class in c#-->
+        @Html.ValidationMessageFor(e => e.Employee.Id)
+
+    </div>
+
+
     <div>
-        @Html.LabelFor(e=>e.Name)
-        @Html.TextBoxFor(e=>e.Name, new { @class = "form-control" })  
-        @Html.ValidationMessageFor(e=>e.Name)
-    </div>   
-    
+        @Html.LabelFor(e => e.Employee.Name)
+        @Html.TextBoxFor(e => e.Employee.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.Name)
+    </div>
+
     <div>
-        @Html.LabelFor(e=>e.Age)
-        @Html.TextBoxFor(e=>e.Age, new { @class = "form-control" })  
-        @Html.ValidationMessageFor(e=>e.Age)
-    </div>    
-    
-    
+        @Html.LabelFor(e => e.Employee.Age)
+        @Html.TextBoxFor(e => e.Employee.Age, new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.Age)
+    </div>
+
+
     <div>
-        @Html.LabelFor(e => e.Gender)
-        @Html.DropDownListFor(e => e.Gender, new List<SelectListItem>()      // this fucking DropDownList takes a List of type <SelectListItem>
+        @Html.LabelFor(e => e.Employee.Gender)   
+        
+        @Html.EnumDropDownListFor(e=>e.Employee.Gender, "Select Gender", new {@class="form-control"})
+       
+
+        @*@Html.DropDownListFor(e => e.Employee.Gender, new List<SelectListItem>()      // this fucking DropDownList takes a List of type <SelectListItem>
         {
             new SelectListItem()                               // now i need to add the SelectListItem
             {
@@ -47,17 +51,29 @@
                 Text = Gender.Female.ToString(),
                 Value = Gender.Female.ToString()
             }
-        }      
-            
-            , "Select Gender" , new {@class="form-control"}
+        }
+
+            , "Select Gender", new { @class = "form-control" }
 
 
-            )
-        @Html.ValidationMessageFor(e => e.Gender)
+            )*@
+        @Html.ValidationMessageFor(e => e.Employee.Gender)
     </div>
-    
 
-    <br/>
+
+    <div>
+        @Html.Label("Department")
+        @Html.DropDownListFor(e => e.Employee.Fk_DepartmentId, new SelectList(Model.Departments, "Id", "Name"),
+            "Select Department", new { @class = "form-control" })
+                                                                     
+        
+        <!--  now i need to initialize the selectList of the departments in the Add action in Employee Controller-->
+
+
+        @Html.ValidationMessageFor(e => e.Employee.Fk_DepartmentId)
+    </div>
+
+    <br />
     <div> <input type="submit" value="Add" class="btn btn-primary" /> </div>
 }
 

@@ -8,5 +8,6 @@ namespace EmployeeTable.ViewModels
         public List<Employee> Employees { get; set; }
         public int Id { get; set; }
         public List<Department> Departments { get; set; }
+        public Employee Employee { get; set; }
     }
 }

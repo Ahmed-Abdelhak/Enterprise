@@ -19,6 +19,7 @@
         <td>Name</td>
         <td>Age</td>
         <td>Gender</td>
+        <td>Department</td>
 
     </tr>
     </thead>
@@ -33,7 +34,7 @@
             <td>@e.Name</td>
             <td>@e.Age</td>
             <td>@e.Gender</td>
-            <td>@e.Fk_DepartmentId</td>
+            <td>@e.Department.Name</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
                                                                      
