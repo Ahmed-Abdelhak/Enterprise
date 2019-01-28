@@ -24,7 +24,8 @@
     <tbody>
     @foreach (var e in Model)
     {
-        <tr>
+        <tr id="id-@e.Id">      <!--  i want to catch the fields for specific department by ID while iterating them in rendering-->  
+                                 <!-- this will help me in Single Page application, so using JS i can catch and render something without refresh-->
 
             <td>@e.Id</td>
             <td>@e.Name</td>
@@ -64,10 +65,21 @@
             $.ajax({
                 url: `/department/delete/${id}`,
                 type: "GET",
-                success: function(data) {
+                success: function(data) {    // data holds the return of the Action "Delete"
                     alert("deleted");
-                    location.reload();        // when i used the normal javascript, i called location.replace(url) 
-                                                // instead, i can use MVC AJAX "which i don't know it yet"
+
+
+                    //location.reload();        // when i used the normal javascript, i called location.replace(url) 
+                    //                            // instead, i can use MVC AJAX "which i don't know it yet"
+                    // or use JavaScript to manipulate the DOM ( min 11:00 in the video of Osama
+
+                    if (data) //if the returned from the action delete is true
+                    {
+                        let ele = document.getElementById(`id-${id}`);
+                        ele.remove();
+                    }
+
+
                 } ,
                 error: function(err) {
                     alert("error");
