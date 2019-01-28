@@ -13,6 +13,7 @@ namespace EmployeeTable.Controllers
 
         public DepartmentController()
         {
+
             _context = new EmpContext();
         }
 

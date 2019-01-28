@@ -41,7 +41,7 @@ namespace EmployeeTable.Controllers
         {
             var employeeVm = new EmployeeViewModel()
             {
-                Departments = _context.Departments.ToList()
+                Departments = _context.Departments.ToList()   // i need to initialize my Departments with the Departments from the DB
             };
 
             if (ModelState.IsValid)
