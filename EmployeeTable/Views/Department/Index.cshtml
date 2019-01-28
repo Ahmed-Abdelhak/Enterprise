@@ -13,9 +13,9 @@
 <table class="table table-bordered">
     <thead>
     <tr>
-        <td>ID</td>
-        <td>Name</td>
-        
+        <th>ID</th>
+        <th>Name</th>
+           <th></th>
 
     </tr>
     </thead>
@@ -29,10 +29,13 @@
             <td>@e.Id</td>
             <td>@e.Name</td>
             
-            <td>
+            <td>                  
+                            <!--text name     Action        -->
                 @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
+                                                       
+                @Html.ActionLink("Inline Edit", "InlineEdit", new { id = e.Id }) |
 
-                <a class="btn-link" onclick="deptDelete(@e.Id)">Delete</a>
+                <a class="btn btn-link" onclick="deptDelete(@e.Id)">Delete</a>
             </td>
 
 
@@ -45,13 +48,33 @@
 
 
 </table>
-              
+                                        
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
     function deptDelete(id) {
         var result = confirm("Confirm the Delete Process ?");
 
         if (result) {
-            window.location.replace("/Department/Delete/"+id);
+
+            //    window.location.replace("/Department/Delete/"+id);
+
+
+            // USING AJAX instead of JS Vanilla
+
+            $.ajax({
+                url: `/department/delete/${id}`,
+                type: "GET",
+                success: function(data) {
+                    alert("deleted");
+                    location.reload();        // when i used the normal javascript, i called location.replace(url) 
+                                                // instead, i can use MVC AJAX "which i don't know it yet"
+                } ,
+                error: function(err) {
+                    alert("error");
+                }
+            });
+
+
         }
     }
 

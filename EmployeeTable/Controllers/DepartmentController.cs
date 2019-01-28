@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using EmployeeTable.Models;
+﻿using EmployeeTable.Models;
 using EmployeeTable.Models.Entities;
+using EmployeeTable.ViewModels;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace EmployeeTable.Controllers
 {
@@ -29,7 +27,6 @@ namespace EmployeeTable.Controllers
             return View();
 
         }
-
 
         [HttpPost]
         public ActionResult Add(Department dep)
@@ -65,6 +62,33 @@ namespace EmployeeTable.Controllers
 
               return View("Index");
           }
+
+
+
+
+        public ActionResult InlineEdit(int id)
+        {
+            var deptVm = new DepartmentViewModel();
+            deptVm.Id = id;
+            
+            deptVm.Departments = _context.Departments.ToList();
+            return View(deptVm);
+        }
+
+        [HttpPost]
+        public ActionResult InlineEdit(Department e)
+        {
+            if (ModelState.IsValid)
+            {
+                var dep = _context.Departments.Find(e.Id);
+                if (dep != null) dep.Name = e.Name;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult Delete(int id)
         {

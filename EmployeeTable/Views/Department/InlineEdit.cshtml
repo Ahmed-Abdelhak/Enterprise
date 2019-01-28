@@ -1,0 +1,87 @@
+﻿@model EmployeeTable.ViewModels.DepartmentViewModel
+
+@{
+    ViewBag.Title = "Departments List";
+}
+
+<br />
+<h2>Departments List</h2>
+<br />
+
+@Html.ActionLink("+ Add a new Dep", "Add")
+
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var e in Model.Departments)
+        {
+            if (Model.Id != e.Id)
+            {
+                <tr>
+
+                    <td>@e.Id</td>
+                    <td>@e.Name</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
+
+                        @Html.ActionLink("Inline Edit", "InlineEdit", new { id = e.Id }) |
+
+                        <a class="btn btn-link" onclick="depDelete(@e.Id)">Delete</a>
+                    </td>
+
+
+
+                </tr>
+
+            }
+            else
+            {
+
+                using (Html.BeginForm("InlineEdit", "Department", FormMethod.Post))
+                {
+
+                    <tr>
+                        <td>@e.Id</td>
+                        @Html.HiddenFor(dep => e.Id)
+                        <td>@Html.TextAreaFor(dep => e.Name, new { @class = "form-control" })</td>
+                        <input type="submit" value="Save" class="btn btn-success" /> |
+                        @Html.ActionLink("Cancel", "Index", new { id = "" }, new { @class = "btn btn-default" })
+
+
+                    </tr>
+
+                }
+
+            }
+
+        }
+
+
+
+
+    </tbody>
+
+
+</table>
+
+
+    <script>
+        function depDelete(id) {
+            var result = confirm("Confirm the Delete Process ?");
+
+            if (result) {
+                window.location.replace("/Department/Delete/"+id);
+            }
+        }
+
+
+</script>

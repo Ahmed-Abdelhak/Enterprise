@@ -13,11 +13,11 @@
 @using (Html.BeginForm("Add","Department",FormMethod.Post))
 {
 
-    <div>
+    @*<div>
         @Html.LabelFor(e => e.Id)
         @Html.TextBoxFor(e => e.Id, new {@class = "form-control"})
         @Html.ValidationMessageFor(e => e.Id)
-    </div>
+    </div>*@
 
     <div>
         @Html.LabelFor(e => e.Name)
