@@ -90,16 +90,17 @@ namespace EmployeeTable.Controllers
         }
 
 
-        public ActionResult Delete(int id)
+        public bool Delete(int id)
         {
 
             var removed = _context.Departments.Find(id);
 
             if (removed != null) _context.Departments.Remove(removed);
 
-            _context.SaveChanges();
+            int res = _context.SaveChanges();             // return will be received by the data of success function in AJAX
+            //return RedirectToAction("Index");
 
-            return RedirectToAction("Index");
+            return res > 0;        // return a boolean to the AJAX request   if delete is success from DB, please eliminate this element from FrontEnd
         }
     }
 }

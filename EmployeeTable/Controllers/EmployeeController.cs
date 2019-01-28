@@ -25,7 +25,7 @@ namespace EmployeeTable.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-
+            
             return View();
         }
 
@@ -52,7 +52,7 @@ namespace EmployeeTable.Controllers
             return View(empVM);
         }
 
-        [HttpPost]
+       [HttpPost]
         public ActionResult InlineEdit(Employee e)
         {
             if (ModelState.IsValid)
@@ -94,16 +94,13 @@ namespace EmployeeTable.Controllers
             return View();
         }
 
-        public bool Delete(int id)
+        public ActionResult Delete(int id)
         {
             var eRemoved = _context.Employees.Find(id);
             if (eRemoved != null)
                 _context.Employees.Remove(eRemoved);
-            int res = _context.SaveChanges();             // return will be received by the data of success function in AJAX
-            //return RedirectToAction("Index");
-
-            return res > 0;    // return a boolean to the AJAX request   if delete is success from DB, please eliminate this element from FrontEnd
-
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }
