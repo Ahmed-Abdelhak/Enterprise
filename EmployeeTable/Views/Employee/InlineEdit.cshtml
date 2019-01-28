@@ -47,22 +47,22 @@
 
 
 
-                </tr>  
-               
-            }
-              else
-              {
-                   
-                  using (Html.BeginForm("InlineEdit", "Employee", FormMethod.Post))
-                  {
+                </tr>
 
-                      <tr>
-                          <td>@e.Id</td>
-                          @Html.HiddenFor(emp => e.Id)
-                          <td>@Html.TextAreaFor(emp => e.Name, new {@class = "form-control"})</td>
-                          <td>@Html.TextAreaFor(emp => e.Age, new {@class = "form-control"})</td>
-                          <td>
-                              @Html.DropDownListFor(mpe => e.Gender,
+            }
+            else
+            {
+
+                using (Html.BeginForm("InlineEdit", "Employee", FormMethod.Post))
+                {
+
+                    <tr>
+                        <td>@e.Id</td>
+                        @Html.HiddenFor(emp => e.Id)
+                        <td>@Html.TextAreaFor(emp => e.Name, new { @class = "form-control" })</td>
+                        <td>@Html.TextAreaFor(emp => e.Age, new { @class = "form-control" })</td>
+                        <td>
+                            @Html.DropDownListFor(mpe => e.Gender,
                                   new List<SelectListItem>()
                                   {
                                       new SelectListItem()
@@ -75,22 +75,29 @@
                                           Text = Gender.Female.ToString(),
                                           Value = Gender.Female.ToString()
                                       }
-                                  },"Select Gender", new {@class = "form-control"})
-                          </td>
-                          <td>                          
-                              <td>@Html.TextAreaFor(emp => e.Fk_DepartmentId, new {@class = "form-control"})</td>
-                              <input type="submit" value="Save" class="btn btn-success"/> |
-                              @Html.ActionLink("Cancel", "Index", new {id = ""}, new {@class = "btn btn-default"})
-                          </td>
+                                  }, "Select Gender", new { @class = "form-control" })
+                        </td>
+
+                        <td>
+                         
+                          
+
+                        </td>
+                        
+
+                        <td>
+                            <input type="submit" value="Save" class="btn btn-success" /> |
+                            @Html.ActionLink("Cancel", "Index", new { id = "" }, new { @class = "btn btn-default" })
+                        </td>
 
 
-                      </tr>
+                    </tr>
 
-                  }  
-               
-              }
-               
+                }
+
             }
+
+        }
 
      
 

@@ -50,45 +50,49 @@
 
 </table>
                                         
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script>
-    function deptDelete(id) {
-        var result = confirm("Confirm the Delete Process ?");
-
-        if (result) {
-
-            //    window.location.replace("/Department/Delete/"+id);
 
 
-            // USING AJAX instead of JS Vanilla
+@section scripts{
+    <script>
+        function deptDelete(id) {
+            var result = confirm("Confirm the Delete Process ?");
 
-            $.ajax({
-                url: `/department/delete/${id}`,
-                type: "GET",
-                success: function(data) {    // data holds the return of the Action "Delete"
-                    alert("deleted");
+            if (result) {
+
+                //    window.location.replace("/Department/Delete/"+id);
 
 
-                    //location.reload();        // when i used the normal javascript, i called location.replace(url) 
-                    //                            // instead, i can use MVC AJAX "which i don't know it yet"
-                    // or use JavaScript to manipulate the DOM ( min 11:00 in the video of Osama
+                // USING AJAX instead of JS Vanilla
 
-                    if (data) //if the returned from the action delete is true
-                    {
-                        let ele = document.getElementById(`id-${id}`);
-                        ele.remove();
+                $.ajax({
+                    url: `/department/delete/${id}`,
+                    type: "GET",
+                    success: function(data) {    // data holds the return of the Action "Delete"
+                        alert("deleted");
+
+
+                        //location.reload();        // when i used the normal javascript, i called location.replace(url) 
+                        //                            // instead, i can use MVC AJAX "which i don't know it yet"
+                        // or use JavaScript to manipulate the DOM ( min 11:00 in the video of Osama
+
+                        if (data) //if the returned from the action delete is true
+                        {
+                            let ele = document.getElementById(`id-${id}`);
+                            ele.remove();
+                        }
+
+
+                    } ,
+                    error: function(err) {
+                        alert("error");
                     }
+                });
 
 
-                } ,
-                error: function(err) {
-                    alert("error");
-                }
-            });
-
-
+            }
         }
-    }
 
 
-</script>
+    </script>
+}
+    

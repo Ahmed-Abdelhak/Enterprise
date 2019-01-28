@@ -28,8 +28,9 @@
 
 
     <div>
-        @Html.LabelFor(e => e.Employee.Gender)
-        @Html.DropDownListFor(e => e.Employee.Gender, new List<SelectListItem>()
+        @Html.LabelFor(e => e.Employee.Gender)  
+        @Html.EnumDropDownListFor(e=>e.Employee.Gender, "Select Gender", new { @class = "form-control" })
+        @*@Html.DropDownListFor(e => e.Employee.Gender, new List<SelectListItem>()
         {
             new SelectListItem()
             {
@@ -42,7 +43,7 @@
                 Text = Gender.Female.ToString(),
                 Value = Gender.Female.ToString()
             }
-        }, "Select Gender", new {@class = "form-control"})
+        }, "Select Gender", new {@class = "form-control"})*@
         @Html.ValidationMessageFor(e => e.Employee.Age)
     </div> 
 

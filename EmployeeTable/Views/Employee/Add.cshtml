@@ -10,11 +10,9 @@
 
 @using (Html.BeginForm())
 {
-    <div>
-        @Html.LabelFor(e => e.Employee.Id)
-        @Html.TextBoxFor(e => e.Employee.Id, new { @class = "form-control" })   <!-- i want to style my text box with a class of cs bootstrap-->
-        <!-- so, i use At because there's a reserved word called class in c#-->
-        @Html.ValidationMessageFor(e => e.Employee.Id)
+    <div>   
+        @Html.HiddenFor(e => e.Employee.Id)
+       
 
     </div>
 

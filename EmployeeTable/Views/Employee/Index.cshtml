@@ -14,54 +14,55 @@
 <br />
 <table class="table table-bordered">
     <thead>
-    <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td>Age</td>
-        <td>Gender</td>
-        <td>Department</td>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Gender</td>
+            <td>Department</td>
 
-    </tr>
+        </tr>
     </thead>
 
 
     <tbody>
-    @foreach (var e in Model)
-    {
-        <tr>
+        @foreach (var e in Model)
+        {
+            <tr>
 
-            <td>@e.Id</td>
-            <td>@e.Name</td>
-            <td>@e.Age</td>
-            <td>@e.Gender</td>
-            <td>@e.Department.Name</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
-                                                                     
-                @Html.ActionLink("Inline Edit", "InlineEdit", new { id = e.Id }) |
+                <td>@e.Id</td>
+                <td>@e.Name</td>
+                <td>@e.Age</td>
+                <td>@e.Gender</td>
+                <td>@e.Department.Name</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
 
-                <a class="btn btn-link" onclick="empDelete(@e.Id)">Delete</a>
-            </td>
+                    @Html.ActionLink("Inline Edit", "InlineEdit", new { id = e.Id }) |
+
+                    <a class="btn btn-link" onclick="empDelete(@e.Id)">Delete</a>
+                </td>
 
 
 
-        </tr>
-    }
+            </tr>
+        }
 
 
     </tbody>
 
 
 </table>
-              
-<script>
-    function empDelete(id) {
-        var result = confirm("Confirm the Delete Process ?");
 
-        if (result) {
-            window.location.replace("/Employee/Delete/"+id);
+@section Scripts{
+    <script>
+        function empDelete(id) {
+            var result = confirm("Confirm the Delete Process ?");
+
+            if (result) {
+                window.location.replace("/Employee/Delete/" + id);
+            }
         }
-    }
 
 
-</script>
+    </script> }

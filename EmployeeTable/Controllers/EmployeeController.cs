@@ -83,29 +83,25 @@ namespace EmployeeTable.Controllers
 
         public ActionResult Edit(int id)
         {
-
-
             var employeeVm = new EmployeeViewModel()
             {
                 Departments = _context.Departments.ToList(),
                 Employee = _context.Employees.Find(id)
-
             };
-
             return View(employeeVm);
         }
 
         [HttpPost]
-        public ActionResult Edit(Employee e)    // the object sent by the submit button of the edit page !
+        public ActionResult Edit(Employee employee)    // the object sent by the submit button of the edit page !
         {
             if (ModelState.IsValid)
             {
-                var emp = _context.Employees.Find(e.Id);
-                emp.Name = e.Name;
-                emp.Age = e.Age;
-                emp.Gender = e.Gender;
-                emp.Department = e.Department;
-                emp.Fk_DepartmentId = e.Fk_DepartmentId;
+                var emp = _context.Employees.Find(employee.Id);
+                emp.Name = employee.Name;
+                emp.Age = employee.Age;
+                emp.Gender = employee.Gender;
+                emp.Department = employee.Department;
+                emp.Fk_DepartmentId = employee.Fk_DepartmentId;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
