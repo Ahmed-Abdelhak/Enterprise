@@ -1,0 +1,123 @@
+﻿@using Microsoft.Ajax.Utilities
+@model EmployeeTable.ViewModels.EmployeeViewModel
+
+
+
+
+
+
+
+@using (Ajax.BeginForm("AddAjax","Employee", new AjaxOptions()
+{
+    Confirm = "Are you Sure ?",
+    HttpMethod = "POST",
+    UpdateTargetId = "EmpsTable",
+    InsertionMode = InsertionMode.Replace,
+    OnSuccess = "$('#myModal').modal('hide') "
+
+
+} ))
+{
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add new Employee</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        @Html.HiddenFor(e => e.Id)
+
+
+                    </div>
+
+
+                    <div>
+                        @Html.LabelFor(e => e.Employee.Name)
+                        @Html.TextBoxFor(e => e.Employee.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.Employee.Name)
+                    </div>
+
+                    <div>
+                        @Html.LabelFor(e => e.Employee.Age)
+                        @Html.TextBoxFor(e => e.Employee.Age, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.Employee.Age)
+                    </div>
+
+
+
+
+                    <div>
+                        @Html.LabelFor(e => e.Employee.Email)
+                        @Html.TextBoxFor(e => e.Employee.Email, new {  @class = "form-control" } )
+                        @Html.ValidationMessageFor(e => e.Employee.Email)
+                    </div>
+
+                    @*<div>
+                        @Html.LabelFor(e => e.Employee.Salary)
+                        @Html.TextBoxFor(e => e.Employee.Salary, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.Employee.Salary)
+                    </div>*@
+
+
+                    <div>
+                        @Html.LabelFor(e => e.Employee.Gender)
+
+                        @Html.EnumDropDownListFor(e => e.Employee.Gender, "Select Gender", new { @class = "form-control" })
+
+
+                        @*@Html.DropDownListFor(e => e.Employee.Gender, new List<SelectListItem>()      // this fucking DropDownList takes a List of type <SelectListItem>
+                            {
+                                new SelectListItem()                               // now i need to add the SelectListItem
+                                {
+                                    Text = Gender.Male.ToString(),
+                                    Value = Gender.Male.ToString()
+                                } ,
+
+                                new SelectListItem()
+                                {
+                                    Text = Gender.Female.ToString(),
+                                    Value = Gender.Female.ToString()
+                                }
+                            }
+
+                                , "Select Gender", new { @class = "form-control" }
+
+
+                                )*@
+                        @Html.ValidationMessageFor(e => e.Employee.Gender)
+                    </div>
+
+
+                    <div>
+                        @Html.Label("Department")
+                        @Html.DropDownListFor(e => e.Employee.Fk_DepartmentId, new SelectList(Model.Departments, "Id", "Name"),
+            "Select Department", new { @class = "form-control" })
+
+
+                        <!--  now i need to initialize the selectList of the departments in the Add action in Employee Controller-->
+
+
+                        @Html.ValidationMessageFor(e => e.Employee.Fk_DepartmentId)
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" value="Add" class="btn btn-primary" /> 
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @*<br />
+        <div> <input type="submit" value="Add" class="btn btn-primary" /> </div>*@
+}
+
+
+

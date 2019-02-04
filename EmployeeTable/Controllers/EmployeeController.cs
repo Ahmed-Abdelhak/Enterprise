@@ -19,9 +19,14 @@ namespace EmployeeTable.Controllers
 
         public ActionResult Index()
         {
+            var employeeVm = new EmployeeViewModel()
+            {
+                Departments = _context.Departments.ToList() ,
+                Employees = _context.Employees.Include(e => e.Department).ToList()
 
+            };
 
-            return View(_context.Employees.Include(e=> e.Department).ToList());
+            return View(employeeVm);
         }
 
         [HttpGet]
@@ -61,6 +66,7 @@ namespace EmployeeTable.Controllers
             var empVM = new EmployeeViewModel();
             empVM.Id = id;
             empVM.Employees = _context.Employees.ToList();
+            empVM.Departments = _context.Departments.ToList();
             return View(empVM);
         }
 
@@ -73,6 +79,8 @@ namespace EmployeeTable.Controllers
                 emp.Name = e.Name;
                 emp.Age = e.Age;
                 emp.Gender = e.Gender;
+                emp.Department= e.Department;
+                emp.Fk_DepartmentId = e.Fk_DepartmentId;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -122,6 +130,29 @@ namespace EmployeeTable.Controllers
                 _context.Employees.Remove(eRemoved);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public ActionResult AddAjax(Employee employee)
+        {
+            var employeeVm = new EmployeeViewModel();
+         
+
+
+            if (ModelState.IsValid)
+            {
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
+                employeeVm.Departments = _context.Departments.ToList();   // i need to initialize my Departments with the Departments from the DB
+                employeeVm.Employees = _context.Employees.ToList();
+               
+                return PartialView("_PartialEmployeeTable", employeeVm);
+
+            }
+            employeeVm.Departments = _context.Departments.ToList();   // i need to initialize my Departments with the Departments from the DB
+
+            return View("Index");
         }
 
     }

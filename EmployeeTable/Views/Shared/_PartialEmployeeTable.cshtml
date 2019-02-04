@@ -1,0 +1,45 @@
+﻿ @model  EmployeeTable.ViewModels.EmployeeViewModel
+
+<table id="EmpsTable" class="table table-bordered">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Gender</td>
+        <td>Department</td>   
+        <td></td>
+
+    </tr>
+    </thead>
+
+
+    <tbody>
+    @foreach (var e in Model.Employees)
+    {
+        <tr>
+
+            <td>@e.Id</td>
+            <td>@e.Name</td>
+            <td>@e.Age</td>    
+            <td>@e.Gender</td>
+            <td>@e.Department.Name</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
+
+                @Html.ActionLink("Inline Edit", "InlineEdit", new { id = e.Id }) |
+
+                <a class="btn btn-link" onclick="empDelete(@e.Id)">Delete</a>
+            </td>
+
+
+
+        </tr>
+    }
+
+
+    </tbody>
+
+
+</table>
+        

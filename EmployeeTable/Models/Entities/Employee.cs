@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace EmployeeTable.Models.Entities
 {
@@ -11,12 +7,15 @@ namespace EmployeeTable.Models.Entities
     public class Employee
     {
         public int Id { get; set; }
-        [MaxLength(50)]
         public string Name { get; set; }
-        [Range(1,100)]
+
+        [Range(1, 100)]
         public int Age { get; set; }
 
         public Gender Gender { get; set; }
+
+        [DataType(DataType.Currency)]
+        public double Salary { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }
@@ -26,6 +25,6 @@ namespace EmployeeTable.Models.Entities
         [ForeignKey("Department")]
         public int Fk_DepartmentId { get; set; }     // just make a field for the ID
 
-       
+
     }
 }

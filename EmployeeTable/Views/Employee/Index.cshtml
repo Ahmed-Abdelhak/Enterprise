@@ -1,6 +1,7 @@
 ﻿<!-- i want to iterate the list to draw it in my table-->
 
-@model List<EmployeeTable.Models.Entities.Employee>
+@using EmployeeTable.ViewModels
+@model EmployeeTable.ViewModels.EmployeeViewModel
 @{
     ViewBag.Title = "Employees List";
 }
@@ -9,52 +10,24 @@
 <h2>Employees List</h2>
 <br />
 
-@Html.ActionLink("+ Add a new Employee", "Add")
+@*@Html.ActionLink("+ Add a new Employee", "Add")*@      
+    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+      + Add a new Employee    
 
-<br />
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Age</td>
-            <td>Gender</td>
-            <td>Department</td>
+    </button>
 
-        </tr>
-    </thead>
-
-
-    <tbody>
-        @foreach (var e in Model)
-        {
-            <tr>
-
-                <td>@e.Id</td>
-                <td>@e.Name</td>
-                <td>@e.Age</td>
-                <td>@e.Gender</td>
-                <td>@e.Department.Name</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
-
-                    @Html.ActionLink("Inline Edit", "InlineEdit", new { id = e.Id }) |
-
-                    <a class="btn btn-link" onclick="empDelete(@e.Id)">Delete</a>
-                </td>
+<br />    
+<br /> 
 
 
 
-            </tr>
-        }
+@Html.Partial("_PartialAddEmployee")
 
+@Html.Partial("_PartialEmployeeTable")                 <!-- Table Partial View-->
 
-    </tbody>
+@section Scripts{   
+    
 
-
-</table>
-
-@section Scripts{
     <script>
         function empDelete(id) {
             var result = confirm("Confirm the Delete Process ?");
@@ -65,4 +38,8 @@
         }
 
 
-    </script> }
+    </script> 
+
+
+
+}             

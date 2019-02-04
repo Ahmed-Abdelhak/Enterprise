@@ -19,7 +19,7 @@
 
     <div>
         @Html.LabelFor(e => e.Employee.Name)
-        @Html.TextBoxFor(e => e.Employee.Name, new { @class = "form-control" })
+        @Html.EditorFor(e => e.Employee.Name, new { @class = "form-control" })
         @Html.ValidationMessageFor(e => e.Employee.Name)
     </div>
 
@@ -28,6 +28,21 @@
         @Html.TextBoxFor(e => e.Employee.Age, new { @class = "form-control" })
         @Html.ValidationMessageFor(e => e.Employee.Age)
     </div>
+
+
+
+
+    <div>
+        @Html.LabelFor(e => e.Employee.Email)  
+        @Html.EditorFor(e => e.Employee.Email, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(e => e.Employee.Email)
+    </div>          
+
+    @*<div>
+        @Html.LabelFor(e => e.Employee.Salary)
+        @Html.TextBoxFor(e => e.Employee.Salary, new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.Salary)
+    </div>*@
 
 
     <div>

@@ -36,13 +36,13 @@
                     <td>@e.Name</td>
                     <td>@e.Age</td>
                     <td>@e.Gender</td> 
-                    <td>@e.Department</td>
+                    <td>@e.Department.Name</td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |  <!-- property called id "matches the route" == mode.Id-->
                                                                      
                         @Html.ActionLink("Inline Edit", "InlineEdit", new { id = e.Id }) |
 
-                        <a class="btn-link" onclick="empDelete(@e.Id)">Delete</a>
+                        <a class="btn btn-link" onclick="empDelete(@e.Id)">Delete</a>
                     </td>
 
 
@@ -79,7 +79,7 @@
                         </td>
 
                         <td>
-                         
+                        @Html.DropDownListFor(emp=>e.Fk_DepartmentId, new SelectList(Model.Departments,"Id","name"),"Select Department", new { @class = "form-control"  }) 
                           
 
                         </td>
